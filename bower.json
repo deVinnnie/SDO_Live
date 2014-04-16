@@ -1,0 +1,12 @@
+{
+  "name": "SDO_Live",
+  "version": "0.1",
+  "authors": [
+    "Vincent Ceulemans"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.11.0",
+    "progress.js": "*"
+  }
+}

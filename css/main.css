@@ -1,0 +1,84 @@
+/**
+ *  Main.css
+ * 
+ *  @author Vincent Ceulemans
+ */
+*{
+    color: #FFF;
+    font-family: "OpenSans", "Arial", sans-serif; 
+}
+
+body{
+    background: #000;
+    padding: 0 10px; 
+}
+
+/*--------------
+HEADERS AND PARAGRAPHS
+---------------*/
+h1{
+    font-size: 3.5em;
+    margin-top: 5px; 
+}
+
+h2{
+    font-size: 2.5em;
+    margin-top: 0; 
+    margin: 15px 0 10px 0; 
+}
+
+p{
+    margin-top: 0;
+    margin-bottom: 0; 
+}
+
+/*--------------
+IMAGEBOX
+---------------*/
+#imageBox{
+    float: left;
+    margin-left: 1em; 
+    width: 60%;
+}
+
+#imageBox figcaption{
+    text-align: left; 
+}
+
+/*--------------
+INFORMATION
+---------------*/
+#informatie ul{
+    padding: 0; 
+    list-style-type: none;
+}
+
+#informatie li,
+#informatie p{
+    font-size: 1.5em; 
+}
+
+#informatie{
+    float: left; 
+    padding: 0 10px; 
+}
+
+/*--------------
+FONTS DEFINITION
+---------------*/
+@font-face {
+    font-family: "OpenSans";
+    font-style: italic, oblique;
+    src: url(../fonts/OpenSans/OpenSans-Italic.ttf);
+}
+
+@font-face {
+    font-family: "OpenSans";
+    src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: "OpenSans";
+    font-weight: bold; 
+    src: url(../fonts/OpenSans/OpenSans-Bold.ttf);
+}

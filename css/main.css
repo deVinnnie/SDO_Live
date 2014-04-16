@@ -8,6 +8,10 @@
     font-family: "OpenSans", "Arial", sans-serif; 
 }
 
+html{
+    width: 100%; 
+}
+
 body{
     background: #000;
     padding: 0 10px; 
@@ -17,13 +21,12 @@ body{
 HEADERS AND PARAGRAPHS
 ---------------*/
 h1{
-    font-size: 3.5em;
+    font-size: 4vw;
     margin-top: 5px; 
 }
 
 h2{
     font-size: 2.5em;
-    margin-top: 0; 
     margin: 15px 0 10px 0; 
 }
 
@@ -36,32 +39,36 @@ p{
 IMAGEBOX
 ---------------*/
 #imageBox{
+    box-sizing: padding-box; 
     float: left;
-    margin-left: 1em; 
-    width: 60%;
+    margin: 0 0 0 1em; 
+    width: calc(60% - 1em);
 }
-
-#imageBox figcaption{
-    text-align: left; 
-}
+    
+    #imageBox figcaption{
+        text-align: left; 
+    }
 
 /*--------------
 INFORMATION
 ---------------*/
-#informatie ul{
-    padding: 0; 
-    list-style-type: none;
-}
-
-#informatie li,
-#informatie p{
-    font-size: 1.5em; 
-}
-
 #informatie{
+    box-sizing: padding-box; 
     float: left; 
-    padding: 0 10px; 
+    padding: 0 10px;
+    width: 30%;
+    width: calc(30% - 10px);
 }
+
+    #informatie ul{
+        padding: 0; 
+        list-style-type: none;
+    }
+
+    #informatie li,
+    #informatie p{
+        font-size: 1.5em; 
+    }
 
 /*--------------
 FONTS DEFINITION

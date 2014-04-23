@@ -22,11 +22,6 @@ var DEFAULT_INTERVAL = 10*1000; //10s
 var IMAGE_RESOLUTION = 1024;
 
 /**
- * Text in title at the top of the page. 
- */
-var TITLE = "SDO Live Beeld - ";
-
-/**
  * The list of images to retrieve.
  *
  * Each entry contains the following values: 
@@ -88,12 +83,12 @@ var views= [
     },
     {
         id: "hmib",
-        title: "HMI Magnetogram [Zwart-Wit]",
+        title: "HMI Magnetogram <small>[Zwart-Wit]</small>",
         sensor: "HMI"
     },
     {
         id: "hmibc",
-        title: "HMI Magnetogram [Kleur]",
+        title: "HMI Magnetogram <small>[Kleur]</small>",
         sensor: "HMI"
     },
     {

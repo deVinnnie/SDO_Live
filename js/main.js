@@ -58,7 +58,7 @@ function refreshImage(){
         document.getElementById("image").src= imageURL; 
 
         // Update Title
-        document.getElementById("titel").innerHTML= TITLE + currentView.title; 
+        document.getElementById("titel").innerHTML= currentView.title; 
 
         // Update the displayed Timestamp. 
         // The obs_date string doesn't have timezone information but is known to be in UTC.

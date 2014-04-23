@@ -21,23 +21,25 @@
     </head>
 
     <body>
-        <h1 id="titel">SDO Live Beeld</h1>
-
         <figure id="imageBox">
-            <img id="image" src="" width="100%"/>
+            <img id="image" src="" height="100%"/>
             
             <!--This stuff needs to be here according to http://sdo.gsfc.nasa.gov/data/rules.php-->
             <figcaption>Courtesy of NASA/SDO and the AIA, EVE, and HMI science teams.</figcaption>
         </figure>
-
+        
         <!--Some additional information about the current image-->
         <div id="informatie">
-            <h2>Tijd</h2>
-                <p id="UTC_tijd"></p>
-                <p style="font-size: 2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=</p>
-                <p id="Lokale_tijd"></p>
-
-            <h2>Sensor</h2>
+            <h1>SDO Live Beeld</h1>
+            <h2 id="titel"></h2>
+            
+            <h3>Tijd</h3>
+                <p>
+                        <span id="UTC_tijd"></span><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+                        <span id="Lokale_tijd"></span>
+                </p>
+            <h3>Sensor</h3>
                 <p id="sensor"></p>
         </div>
     </body>

@@ -9,7 +9,8 @@
 }
 
 html{
-    width: 100%; 
+    width: 100%;
+    height: 100%; 
 }
 
 body{
@@ -20,16 +21,6 @@ body{
 /*--------------
 HEADERS AND PARAGRAPHS
 ---------------*/
-h1{
-    font-size: 4vw;
-    margin-top: 5px; 
-}
-
-h2{
-    font-size: 2.5em;
-    margin: 15px 0 10px 0; 
-}
-
 p{
     margin-top: 0;
     margin-bottom: 0; 
@@ -41,30 +32,41 @@ IMAGEBOX
 #imageBox{
     float: left;
     margin: 0 1em 0 0; 
-    width: calc(60% - 1em);
+    width: 90vh; 
+    height: 90vh;
 }
     
     #imageBox figcaption{
-        text-align: left; 
+        text-align: left;
+        font-size: 0.7em;
     }
 
 /*--------------
 INFORMATION
 ---------------*/
 #informatie{
-    box-sizing: padding-box; 
-    float: left; 
+    text-align: left; 
     padding: 0 10px;
-    width: 30%;
-    width: calc(30% - 10px);
 }
 
-    #informatie ul{
-        padding: 0; 
-        list-style-type: none;
+    #informatie h1{
+        font-size: 3vw;
+        margin-top: 5px;
+        margin-bottom: 0; 
+        text-align: right;
+    }
+    
+    #informatie h2{
+        margin-top: 0; 
+        font-size: 2.5vw;
+        text-align: right;
     }
 
-    #informatie li,
+    #informatie h3{
+        font-size: 1.8em;
+        margin: 15px 0 10px 0; 
+    }
+    
     #informatie p{
         font-size: 1.5em; 
     }

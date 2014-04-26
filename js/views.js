@@ -9,7 +9,7 @@
  */
 
 /**
- * Interval (in miliseconds) at which images are refresehd.
+ * Refresh rate (in miliseconds). 
  * SDO images are refreshed every 15 minutes.
  */
 var DEFAULT_INTERVAL = 10*1000; //10s

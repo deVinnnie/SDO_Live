@@ -65,10 +65,8 @@ function refreshImage(){
         //
         //The rss-feeds do things differently however. The date format is: Wed, 25 Jun 2014 16:15:02 +0000
         //The closest the Date.parse (and the Date constructor) will accept is : Wed, 25 Jun 2014 16:15:02 GMT 
-        
-        console.log(latest.pubDate.replace(/\+0000/, "")+"GMT");
-        var observationDate = new Date(latest.pubDate.replace(/\+0000/, "GMT")); // "\s" = whitespace character
-        console.log(observationDate); 
+        var observationDate = new Date(latest.pubDate.replace(/\+0000/, "GMT")); 
+       
         // By default the printed date does not include padding (leading zeroes).
         // The code appends a zero to the front of each part of the time. 
         // 2 becomes 02; 11 becomes 011. 

@@ -38,21 +38,18 @@ function init(){
 }
 
 function refreshImage(){
-    var currentView = views[currentIndex]; 
-    var url = JSON_URL + "?c=" + currentView.id;
-    
+    var currentView = views[currentIndex];
+    var url = "./proxy.php?channel="+currentView.id; 
+
     $.getJSON(url, function(data) {
         //The first element of the JSON feed contains latest image.
-        var latest = data['data'][0];
+        var latest = data['item'][0];
 
         // The JSON feeds offers images in 512px times 512px by default.
         // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
         // To access the other resolutions we need to replace the "_512_" with the appropriate resolution.
         // /_512_/ is interpreted as a regular expression. 
-        var filename = latest.filename.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
-        var imageURL = BASE_URL 
-                        + latest.filepath  // Example: "/2014/04/16/"
-                         + filename;
+        var imageURL = latest.link.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
     
         // Refresh Image: Browser will retrieve image from server or reload from cache if the image was not updated.
         document.getElementById("image").src= imageURL; 
@@ -60,12 +57,18 @@ function refreshImage(){
         // Update Title
         document.getElementById("titel").innerHTML= currentView.title; 
 
-        // Update the displayed Timestamp. 
+        // Update the displayed Timestamp.
+        // Previous:
         // The obs_date string doesn't have timezone information but is known to be in UTC.
         // For crossbrowser compatibility the date is converted to the following format: "YYYY-MM-DDTHH:MM:SSZ"
-        // Z stands for Zulu = UTC in military terms. 
-        var observationDate = new Date(latest.obs_date.replace(/\s/, "T")+"Z"); // "\s" = whitespace character
-
+        // Z stands for Zulu = UTC in military terms.
+        //
+        //The rss-feeds do things differently however. The date format is: Wed, 25 Jun 2014 16:15:02 +0000
+        //The closest the Date.parse (and the Date constructor) will accept is : Wed, 25 Jun 2014 16:15:02 GMT 
+        
+        console.log(latest.pubDate.replace(/\+0000/, "")+"GMT");
+        var observationDate = new Date(latest.pubDate.replace(/\+0000/, "GMT")); // "\s" = whitespace character
+        console.log(observationDate); 
         // By default the printed date does not include padding (leading zeroes).
         // The code appends a zero to the front of each part of the time. 
         // 2 becomes 02; 11 becomes 011. 

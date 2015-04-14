@@ -10,19 +10,19 @@ Static Variables
 -------------------*/
 
 /**
- * URL to image directory. 
+ * URL to image directory.
  */
 var BASE_URL = "http://sdo.gsfc.nasa.gov/assets/img/browse";
 
 /**
- * URL to JSON-feeds. 
+ * URL to JSON-feeds.
  */
 var JSON_URL = "http://sdo.gsfc.nasa.gov/feeds/json.php";
 
 /*----------------
 Global Variables
 -------------------*/
-var currentIndex = 0; 
+var currentIndex = 0;
 
 /*----------------
 Methods
@@ -33,91 +33,97 @@ $(document).ready(
 );
 
 function init(){
-    progressJs().start(); 
-    refreshImage(); 
+    progressJs().start();
+    refreshImage();
 }
 
 function refreshImage(){
     var currentView = views[currentIndex];
-    var url = "./proxy.php?channel="+currentView.id; 
+    var url = "./proxy.php?channel="+currentView.id;
 
     $.getJSON(url, function(data) {
-        //The first element of the JSON feed contains latest image.
-        var latest = data['item'][0];
+        try{
+            //The first element of the JSON feed contains latest image.
+            var latest = data['item'][0];
 
-        // The JSON feeds offers images in 512px times 512px by default.
-        // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
-        // To access the other resolutions we need to replace the "_512_" with the appropriate resolution.
-        // /_512_/ is interpreted as a regular expression. 
-        var imageURL = latest.link.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
-    
-        // Refresh Image: Browser will retrieve image from server or reload from cache if the image was not updated.
-        document.getElementById("image").src= imageURL; 
+            // The JSON feeds offers images in 512px times 512px by default.
+            // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
+            // To access the other resolutions we need to replace the "_512_" with the appropriate resolution.
+            // /_512_/ is interpreted as a regular expression.
+            var imageURL = latest.link.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
 
-        // Update Title
-        document.getElementById("titel").innerHTML= currentView.title; 
+            // Refresh Image: Browser will retrieve image from server or reload from cache if the image was not updated.
+            document.getElementById("image").src= imageURL;
 
-        // Update the displayed Timestamp.
-        // Previous:
-        // The obs_date string doesn't have timezone information but is known to be in UTC.
-        // For crossbrowser compatibility the date is converted to the following format: "YYYY-MM-DDTHH:MM:SSZ"
-        // Z stands for Zulu = UTC in military terms.
-        //
-        //The rss-feeds do things differently however. The date format is: Wed, 25 Jun 2014 16:15:02 +0000
-        //The closest the Date.parse (and the Date constructor) will accept is : Wed, 25 Jun 2014 16:15:02 GMT 
-        var observationDate = new Date(latest.pubDate.replace(/\+0000/, "GMT")); 
-       
-        // By default the printed date does not include padding (leading zeroes).
-        // The code appends a zero to the front of each part of the time. 
-        // 2 becomes 02; 11 becomes 011. 
-        // Calling slice with argument -2 results in slicing the string from the second to last position to the last position.
-        // 02 becomes 02; 011 becomes 11.
-        document.getElementById("UTC_tijd").textContent = ('0' + observationDate.getUTCHours()).slice(-2) + ":"
-                    + ('0' + observationDate.getUTCMinutes()).slice(-2) + ":"
-                    + ('0' + observationDate.getUTCSeconds()).slice(-2)
-                    + " UTC";  
+            // Update Title
+            document.getElementById("titel").innerHTML= currentView.title;
 
-        document.getElementById("Lokale_tijd").textContent = ('0' + observationDate.getHours()).slice(-2) + ":"
-                        + ('0' + observationDate.getMinutes()).slice(-2) + ":"
-                        + ('0' + observationDate.getSeconds()).slice(-2)
-                        + " Lokale Tijd";
+            // Update the displayed Timestamp.
+            // Previous:
+            // The obs_date string doesn't have timezone information but is known to be in UTC.
+            // For crossbrowser compatibility the date is converted to the following format: "YYYY-MM-DDTHH:MM:SSZ"
+            // Z stands for Zulu = UTC in military terms.
+            //
+            //The rss-feeds do things differently however. The date format is: Wed, 25 Jun 2014 16:15:02 +0000
+            //The closest the Date.parse (and the Date constructor) will accept is : Wed, 25 Jun 2014 16:15:02 GMT
+            var observationDate = new Date(latest.pubDate.replace(/\+0000/, "GMT"));
 
-        // Update Sensor Information
-        var found = false;
-        var i = 0;
-        var sensor; 
-        while(!found && i < sensors.length){
-            if(sensors[i].abbr == currentView.sensor){
-                found = true;
-                sensor = sensors[i]; 
+            // By default the printed date does not include padding (leading zeroes).
+            // The code appends a zero to the front of each part of the time.
+            // 2 becomes 02; 11 becomes 011.
+            // Calling slice with argument -2 results in slicing the string from the second to last position to the last position.
+            // 02 becomes 02; 011 becomes 11.
+            document.getElementById("UTC_tijd").textContent = ('0' + observationDate.getUTCHours()).slice(-2) + ":"
+                        + ('0' + observationDate.getUTCMinutes()).slice(-2) + ":"
+                        + ('0' + observationDate.getUTCSeconds()).slice(-2)
+                        + " UTC";
+
+            document.getElementById("Lokale_tijd").textContent = ('0' + observationDate.getHours()).slice(-2) + ":"
+                            + ('0' + observationDate.getMinutes()).slice(-2) + ":"
+                            + ('0' + observationDate.getSeconds()).slice(-2)
+                            + " Lokale Tijd";
+
+            // Update Sensor Information
+            var found = false;
+            var i = 0;
+            var sensor;
+            while(!found && i < sensors.length){
+                if(sensors[i].abbr == currentView.sensor){
+                    found = true;
+                    sensor = sensors[i];
+                }
+                else{
+                    i++;
+                }
+            }
+
+            document.getElementById("sensor").textContent = sensor.abbr + " (" + sensor.name +")";
+
+            //Update Index
+            if(currentIndex >= views.length-1){
+                currentIndex=0; //Resets the index to the first element.
             }
             else{
-                i++; 
+                currentIndex++;
             }
-        }
 
-        document.getElementById("sensor").textContent = sensor.abbr + " (" + sensor.name +")";
+            // Determine the duration this image will be displayed.
+            var interval;
+            if(currentView.hasOwnProperty("duration")){
+                interval = currentView.duration;
+            }
+            else{
+                interval = DEFAULT_INTERVAL;
+            }
 
-        //Update Index 
-        if(currentIndex >= views.length-1){ 
-            currentIndex=0; //Resets the index to the first element.
+            progressJs().set(100); //Reset the progressbar.
+            progressJs().autoIncrease(-1, interval/100); //Decrease the progressbar with 1% once every 0.01 * interval.
         }
-        else{
-            currentIndex++; 
+        catch(e){
+            console.error(e.message);
         }
-
-        // Determine the duration this image will be displayed. 
-        var interval; 
-        if(currentView.hasOwnProperty("duration")){
-            interval = currentView.duration; 
+        finally{
+            setTimeout(refreshImage,interval);
         }
-        else{
-            interval = DEFAULT_INTERVAL;
-        }
-       
-        progressJs().set(100); //Reset the progressbar. 
-        progressJs().autoIncrease(-1, interval/100); //Decrease the progressbar with 1% once every 0.01 * interval. 
-        
-        setTimeout(refreshImage,interval); 
     });
 }

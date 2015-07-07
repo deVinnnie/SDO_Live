@@ -1,0 +1,9 @@
+{
+  "name": "SDO_Live",
+  "version": "0.3.1",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-concat" : "*",
+    "grunt-contrib-copy" :"*"
+  }
+}

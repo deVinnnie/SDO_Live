@@ -1,6 +1,6 @@
 {
   "name": "SDO_Live",
-  "version": "0.1",
+  "version": "0.3.1",
   "authors": [
     "Vincent Ceulemans"
   ],
@@ -8,5 +8,6 @@
   "dependencies": {
     "jquery": "1.11.0",
     "progress.js": "*"
-  }
+  },
+  "private" : true
 }

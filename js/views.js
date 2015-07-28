@@ -10,16 +10,23 @@
 
 /**
  * Refresh rate (in miliseconds).
- * SDO images are refreshed every 15 minutes.
+ * Default amount time during which the image will be displayed.
+ *
  */
 var DEFAULT_INTERVAL = 20*1000; //10s
+
+/*
+* Interval at which new images are downloaded.
+* SDO images are refreshed every 15 minutes.
+*/
+var FETCH_INTERVAL = 15*60*1000; //15 minutes
 
 /**
  *  Image resolution in pixels.
  *  Example: 512, 1024...
  *  Check http://sdo.gsfc.nasa.gov/data/ for available resolutions.
  */
-var IMAGE_RESOLUTION = 1024;
+var IMAGE_RESOLUTION = 512;
 
 /**
  * The list of images to retrieve.
@@ -28,7 +35,7 @@ var IMAGE_RESOLUTION = 1024;
  * id: Used for feed retrieval. Do not change this value.
  * title: Text displayed after "SDO Live -" in H1 of page.
  * duration: Amount of time to wait before showing the next image.
- *          (Expressed in miliseconds: 1 seconds = 1000)
+ *          (Expressed in milliseconds: 1 seconds = 1000)
  *          If no duration is specified the default value in DEFAULT_INTERVAL is used.
  *
  * You can comment out entries which should not be displayed.
@@ -117,17 +124,8 @@ var views= [
  * The list of instruments/sensors aboard the SDO.
  * This is used to map the abbreviation of each instrument to its full name.
  */
-var sensors = [
-    {
-        abbr: "AIA",
-        name: "Atmospheric Imaging Assembly"
-    },
-    {
-        abbr: "HMI",
-        name: "Helioseismic and Magnetic Imager"
-    },
-    {
-        abbr: "EVE",
-        name: "Extreme Ultraviolet Variability Experiment"
-    }
-]
+var sensors = {
+    "AIA" : "Atmospheric Imaging Assembly",
+    "HMI" : "Helioseismic and Magnetic Imager",
+    "EVE" : "Extreme Ultraviolet Variability Experiment"
+}; 

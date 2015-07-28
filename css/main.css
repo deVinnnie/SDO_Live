@@ -1,92 +1,143 @@
 /**
  *  Main.css
- * 
+ *
  *  @author Vincent Ceulemans
  */
 *{
     color: #FFF;
-    font-family: "OpenSans", "Arial", sans-serif; 
+    font-family: "OpenSans", "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 html{
     width: 100%;
-    height: 100%; 
+    height: 100%;
 }
 
 body{
     background: #000;
-    padding: 0 10px; 
-}
-
-/*--------------
-HEADERS AND PARAGRAPHS
----------------*/
-p{
-    margin-top: 0;
-    margin-bottom: 0; 
+    padding: 0 10px;
 }
 
 /*--------------
 IMAGEBOX
 ---------------*/
 #imageBox{
-    float: left;
-    margin: 0 1em 0 0; 
-    width: 90vh; 
-    height: 90vh;
+    /*width: 100vh;
+    height: 100vh;*/
 }
-    
-    #imageBox figcaption{
-        text-align: left;
-        font-size: 0.7em;
-    }
+
+#image{
+    float: left;
+    width: 100vh; /* Make image fill as much space possible: set height to full height of viewscreen.*/
+    height: 100vh;
+    max-width: 60vw; /* Limit size to 60% of the width of the viewscreen.*/
+    max-height: 60vw;
+}
 
 /*--------------
 INFORMATION
 ---------------*/
+#courtesy-message{
+    text-align: right;
+    font-style: italic;
+    font-size: 1.0em;
+    height: 50px;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Push #courtesy-message to bottom of page. */
+}
+
 #informatie{
-    text-align: left; 
+    flex: 1; /* Push #courtesy-message to bottom of page. */
+    text-align: left;
     padding: 0 10px;
+    font-style: normal;
 }
 
     #informatie h1{
         font-size: 3vw;
         margin-top: 5px;
-        margin-bottom: 0; 
+        margin-bottom: 0;
         text-align: right;
     }
-    
+
     #informatie h2{
-        margin-top: 0; 
+        margin-top: 0;
         font-size: 2.5vw;
         text-align: right;
     }
 
     #informatie h3{
         font-size: 1.8em;
-        margin: 15px 0 10px 0; 
+        margin: 15px 0 10px 0;
     }
-    
+
     #informatie p{
-        font-size: 1.5em; 
+        font-size: 1.5em;
     }
+
+#loading-icon::after{
+    display: inline-block;
+    font-size: 2vw;
+    vertical-align: super;
+    content: "\f110";
+    font-family: "FontAwesome";
+    -webkit-animation: spin 1s  infinite steps(8);
+    animation: spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
 
 /*--------------
 FONTS DEFINITION
 ---------------*/
 @font-face {
     font-family: "OpenSans";
-    font-style: italic, oblique;
-    src: url(../fonts/OpenSans/OpenSans-Italic.ttf);
+    font-style: italic;
+    src: url("../fonts/OpenSans/OpenSans-Italic.ttf");
 }
 
 @font-face {
     font-family: "OpenSans";
-    src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
+    font-weight: bold;
+    src: url('../fonts/OpenSans/OpenSans-Bold.ttf');
 }
 
 @font-face {
     font-family: "OpenSans";
-    font-weight: bold; 
-    src: url(../fonts/OpenSans/OpenSans-Bold.ttf);
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/OpenSans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: "FontAwesome";
+    src: url('../lib/fonts/FontAwesome.otf');
+    font-weight: normal;
+    font-style: normal;
 }

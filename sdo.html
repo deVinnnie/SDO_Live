@@ -5,42 +5,44 @@
         <meta charset="UTF-8">
         <meta name="author" content="Volkssterrenwacht MIRA">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <!--Prevent this page from showing up in Google search results-->
         <meta name="robots" content="NONE">
         <meta name="googlebot" content="nosnippet,nofollow,noindex" />
-        
-        <script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="libs/progress.js/minified/progress.min.js"></script>
 
+        <script type="text/javascript" src="lib/libs.js"></script>
         <script type="text/javascript" src="js/views.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="libs/progress.js/minified/progressjs.min.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/css/progressjs.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
     </head>
 
     <body>
-        <figure id="imageBox">
-            <img id="image" src="" height="100%"/>
-            
-            <!--This stuff needs to be here according to http://sdo.gsfc.nasa.gov/data/rules.php-->
-            <figcaption>Courtesy of NASA/SDO and the AIA, EVE, and HMI science teams.</figcaption>
-        </figure>
-        
+        <!--<div id="image-wrapper">-->
+            <img id="image" src="images/black_square.png" />
+        <!--</div>-->
+
         <!--Some additional information about the current image-->
-        <div id="informatie">
-            <h1>SDO Live Beeld</h1>
-            <h2 id="titel"></h2>
-            
-            <h3>Tijd</h3>
-                <p>
-                        <span id="UTC_tijd"></span><br/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-                        <span id="Lokale_tijd"></span>
-                </p>
-            <h3>Sensor</h3>
-                <p id="sensor"></p>
-        </div>
+        <aside>
+            <div id="informatie">
+                <h1>SDO Live Beeld <span id="loading-icon"></span></h1>
+                <h2 id="titel"></h2>
+
+                <div id="metadata">
+                    <h3>Tijd</h3>
+                        <p>
+                                <span id="UTC_tijd"></span><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+                                <span id="Lokale_tijd"></span>
+                        </p>
+                    <h3>Sensor</h3>
+                    <p id="sensor"></p>
+                </div>
+            </div>
+
+            <!--This stuff needs to be here according to http://sdo.gsfc.nasa.gov/data/rules.php-->
+            <p id="courtesy-message">Courtesy of NASA/SDO and the AIA, EVE, and HMI science teams.</p>
+        </aside>
     </body>
 </html>

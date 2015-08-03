@@ -23,11 +23,6 @@ body{
 /*--------------
 IMAGEBOX
 ---------------*/
-#imageBox{
-    /*width: 100vh;
-    height: 100vh;*/
-}
-
 #image{
     float: left;
     width: 100vh; /* Make image fill as much space possible: set height to full height of viewscreen.*/
@@ -60,7 +55,7 @@ aside{
 }
 
     #informatie h1{
-        font-size: 3vw;
+        font-size: 4vw;
         margin-top: 5px;
         margin-bottom: 0;
         text-align: right;
@@ -68,17 +63,17 @@ aside{
 
     #informatie h2{
         margin-top: 0;
-        font-size: 2.5vw;
+        font-size: 3vw;
         text-align: right;
     }
 
     #informatie h3{
-        font-size: 1.8em;
+        font-size: 2.5em;
         margin: 15px 0 10px 0;
     }
 
     #informatie p{
-        font-size: 1.5em;
+        font-size: 2.0em;
     }
 
 #loading-icon::after{

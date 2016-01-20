@@ -18,7 +18,15 @@ var BASE_URL = "http://sdo.gsfc.nasa.gov/assets/img/browse";
 Global Variables
 -------------------*/
 var currentIndex = 0;
+
+/**
+ * Number of errors (image not ready, not loaded etc.) for the currently selected image.
+ */
 var faults = 0;
+
+/** 
+ * Number of faults before moving on to next image.
+ */
 var treshold = 10;
 
 var imageCache = [];
@@ -90,8 +98,9 @@ function parseImage(url, index){
     $.getJSON(url, function(data) {
         try{
             console.log("Parsing Image " + (index+1));
+
             //The first element of the JSON feed contains latest image.
-            var latest = data['item'][0];
+            var latest = data['channel']['item'][0];
 
             // The JSON feeds offers images in 512px times 512px by default.
             // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
@@ -99,10 +108,18 @@ function parseImage(url, index){
             // /_512_/ is interpreted as a regular expression.
             var imageURL = latest.link.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
 
-            // Refresh Image: Browser will retrieve image from server or reload from cache if the image was not updated.
-            //document.getElementById("image").src= imageURL;
-
+            // Load Image: Browser will retrieve image from server. On the next reload it will use the cache instead of the web source.
             var nextImage = new Image();
+            nextImage.onload = function(){ //Only mark as done when image is fully loaded!
+                console.log("Loaded!");
+                //Mark as done and check if all images are loaded.
+                //Remove loading indicator if true.
+                readyList[index] = true;
+                if(readyList.isDone()){
+                    console.log("Done Fetching and Parsing Images.")
+                    document.getElementById('loading-icon').style.display = 'none';
+                }
+            };
             nextImage.src = imageURL;
             nextImage.id = "image";
 
@@ -136,14 +153,6 @@ function parseImage(url, index){
                 'utc' : utc,
                 'lokaal' : local
             }
-
-            //Mark as done and check if all images are loaded.
-            //Remove loading indicator if true.
-            readyList[index] = true;
-            if(readyList.isDone()){
-                console.log("Done Fetching and Parsing Images.")
-                document.getElementById('loading-icon').style.display = 'none';
-            }
         }
         catch(e){
             console.error(e.message);
@@ -158,9 +167,10 @@ function parseImage(url, index){
 
 function refreshImage(){
     console.log("Switching to image " + (currentIndex+1));
-    if(typeof imageCache[currentIndex] === 'undefined'){
+    if(!readyList[currentIndex]){
         faults++;
         if(faults > treshold){
+            //Load next image if current image failed too many times.
             faults = 0;
             currentIndex = (currentIndex + 1) % (views.length);
         }
@@ -168,13 +178,12 @@ function refreshImage(){
         setTimeout(refreshImage, 1000);
         return;
     }
-    else{
-        $("#metadata").fadeIn();
-    }
+
+    $("#metadata").fadeIn();
 
     var currentView = views[currentIndex];
 
-    document.getElementById("titel").innerHTML= currentView.title;
+    document.getElementById("titel").innerHTML = currentView.title;
     document.getElementById("UTC_tijd").textContent = imageCache[currentIndex].utc;
     document.getElementById("Lokale_tijd").textContent = imageCache[currentIndex].lokaal;
 
@@ -185,16 +194,13 @@ function refreshImage(){
     imageElement.parentNode.replaceChild(imageCache[currentIndex].image, imageElement);
 
     // Determine the duration this image will be displayed.
-    var interval;
+    var interval = DEFAULT_INTERVAL;
     if(currentView.hasOwnProperty("duration")){
         interval = currentView.duration;
     }
-    else{
-        interval = DEFAULT_INTERVAL;
-    }
 
     progressJs().set(100); //Reset the progressbar.
-    progressJs().autoIncrease(-1, interval/100); //Decrease the progressbar with 1% once every 0.01 * interval.
+    progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 1% once every 0.01 * interval.
 
     var nextIndex = (currentIndex + 1) % (views.length);
     currentIndex = nextIndex;

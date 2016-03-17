@@ -28,14 +28,7 @@ module.exports = function(grunt) {
                     {src:'README.md', dest:'dist/README.md'},
                     {src:'LICENSE', dest:'dist/LICENSE'}
                 ]
-            },
-            deploy: {
-                cwd: '/',
-                file: [
-                    {expand: true, src: ['/home/vincent/MIRA/Software_Projecten/SDO_Live/SDO_Live/dist/**'], dest: '/home/vincent/Development/Tmp/SDO_Live'}
-                ]
             }
-
         }
     });
 

@@ -19,15 +19,11 @@ Global Variables
 -------------------*/
 var currentIndex = 0;
 
-/**
- * Number of errors (image not ready, not loaded etc.) for the currently selected image.
- */
-var faults = 0;
 
-/** 
- * Number of faults before moving on to next image.
+/**
+ * Is the first set of images loaded yet?
  */
-var treshold = 10;
+var initialLoadComplete = false;
 
 var imageCache = [];
 var readyList = [];
@@ -37,6 +33,10 @@ readyList.clear = function(){
     }
 }
 
+/**
+ * Returns true when all elements in list are loaded (true).
+ * Returns false when one or more elements are still loading (false).
+ */
 readyList.isDone = function(){
     var i = 0;
     var isDone = true;
@@ -45,6 +45,16 @@ readyList.isDone = function(){
         i++;
     }
     return isDone;
+}
+
+readyList.count = function(){
+    var count = 0;
+    for(var i=0; i<= (this.length-1); i++){
+        if(this[i]){
+            count++;
+        }
+    }
+    return count;
 }
 
 /*----------------
@@ -83,6 +93,9 @@ function init(){
     window.setInterval(fetchImages, FETCH_INTERVAL);
 }
 
+/**
+ * Contacts server and loads new images into the imageCache variable.
+ */
 function fetchImages(){
     readyList.clear();
     document.getElementById('loading-icon').style.display = 'inline-block'; //Display loading icon.
@@ -94,6 +107,10 @@ function fetchImages(){
     }
 }
 
+/**
+ * Gets the JSON data at the specified URL `url`.
+ * When loading is complete sets element `index` of readyList to true.
+ */
 function parseImage(url, index){
     $.getJSON(url, function(data) {
         try{
@@ -115,9 +132,15 @@ function parseImage(url, index){
                 //Mark as done and check if all images are loaded.
                 //Remove loading indicator if true.
                 readyList[index] = true;
+
+                document.getElementById('loading').innerHTML =
+                    '<p>Starting... ' + readyList.count() + ' / ' + readyList.length +'</p>';
+
                 if(readyList.isDone()){
                     console.log("Done Fetching and Parsing Images.")
                     document.getElementById('loading-icon').style.display = 'none';
+                    document.getElementById('loading').style.opacity = 0;
+                    initialLoadComplete = true;
                 }
             };
             nextImage.src = imageURL;
@@ -165,16 +188,17 @@ function parseImage(url, index){
     });
 }
 
+/**
+ * Move carousel to next image.
+ *
+ * If image is not yet loaded
+ * Will try for `threshold` amount before giving up and moving to the next image.
+ *
+ */
 function refreshImage(){
     console.log("Switching to image " + (currentIndex+1));
-    if(!readyList[currentIndex]){
-        faults++;
-        if(faults > treshold){
-            //Load next image if current image failed too many times.
-            faults = 0;
-            currentIndex = (currentIndex + 1) % (views.length);
-        }
-
+    if(!initialLoadComplete || !readyList[currentIndex]){
+        currentIndex = (currentIndex + 1) % (views.length);
         setTimeout(refreshImage, 1000);
         return;
     }
@@ -200,10 +224,9 @@ function refreshImage(){
     }
 
     progressJs().set(100); //Reset the progressbar.
-    progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 1% once every 0.01 * interval.
+    progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 5% once every 1/20 * interval.
 
-    var nextIndex = (currentIndex + 1) % (views.length);
-    currentIndex = nextIndex;
+    currentIndex = (currentIndex + 1) % (views.length);
 
-    setTimeout(refreshImage,interval);
+    setTimeout(refreshImage, interval);
 }

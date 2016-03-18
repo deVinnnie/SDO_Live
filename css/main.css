@@ -108,6 +108,28 @@ aside{
     }
 }
 
+#loading{
+	position: fixed;
+	bottom: 150px;
+	left: 50%;
+	width: 400px;
+	margin-left: -200px;
+
+	border: 1px solid #666;
+	background-color: #334;
+	padding: 15px 0;
+	text-align: center;
+	font-size: 3vw;
+	opacity: .9;
+
+	-webkit-transition: opacity 0.5s ease-out;  /* Saf3.2+, Chrome */
+	-moz-transition: opacity 0.5s ease-out;  /* FF4+ */
+	-ms-transition: opacity 0.5s ease-out;  /* IE10? */
+	-o-transition: opacity 0.5s ease-out;  /* Opera 10.5+ */
+	transition: opacity 0.5s ease-out;
+}
+
+
 /*--------------
 FONTS DEFINITION
 ---------------*/

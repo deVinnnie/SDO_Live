@@ -19,6 +19,7 @@ Global Variables
 -------------------*/
 var currentIndex = 0;
 
+var imageElement;
 
 /**
  * Is the first set of images loaded yet?
@@ -88,9 +89,10 @@ function init(){
     progressJs().start();
 
     fetchImages();
-    refreshImage();
 
     window.setInterval(fetchImages, FETCH_INTERVAL);
+
+    imageElement = $("#image");
 }
 
 /**
@@ -117,7 +119,7 @@ function parseImage(url, index){
             console.log("Parsing Image " + (index+1));
 
             //The first element of the JSON feed contains latest image.
-            var latest = data['channel']['item'][0];
+            var latest = data['channel']['item'];
 
             // The JSON feeds offers images in 512px times 512px by default.
             // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
@@ -141,6 +143,8 @@ function parseImage(url, index){
                     document.getElementById('loading-icon').style.display = 'none';
                     document.getElementById('loading').style.opacity = 0;
                     initialLoadComplete = true;
+
+                    refreshImage();
                 }
             };
             nextImage.src = imageURL;
@@ -214,8 +218,12 @@ function refreshImage(){
     var sensorFullName = sensors[currentView.sensor];
     document.getElementById('sensor').textContent = currentView.sensor + " (" + sensorFullName +")";
 
-    var imageElement = document.getElementById('image');
-    imageElement.parentNode.replaceChild(imageCache[currentIndex].image, imageElement);
+    //var imageElement = document.getElementById('image');
+    //imageElement.parentNode.replaceChild(imageCache[currentIndex].image, imageElement);
+    //imageElement.src=imageCache[currentIndex].image.src;
+
+    image_url = imageCache[currentIndex].image.src;
+    imageElement.attr('src', image_url);
 
     // Determine the duration this image will be displayed.
     var interval = DEFAULT_INTERVAL;
@@ -227,6 +235,5 @@ function refreshImage(){
     progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 5% once every 1/20 * interval.
 
     currentIndex = (currentIndex + 1) % (views.length);
-
     setTimeout(refreshImage, interval);
 }

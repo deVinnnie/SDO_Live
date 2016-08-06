@@ -17,46 +17,16 @@ var BASE_URL = "http://sdo.gsfc.nasa.gov/assets/img/browse";
 /*----------------
 Global Variables
 -------------------*/
-var currentIndex = 0;
+var currentIndex;
 
 var imageElement;
 
 /**
  * Is the first set of images loaded yet?
  */
-var initialLoadComplete = false;
+var carouselStarted = false;
 
 var imageCache = [];
-var readyList = [];
-readyList.clear = function(){
-    for(var i = 0; i <= (views.length-1); i++){
-        this[i] = false;
-    }
-}
-
-/**
- * Returns true when all elements in list are loaded (true).
- * Returns false when one or more elements are still loading (false).
- */
-readyList.isDone = function(){
-    var i = 0;
-    var isDone = true;
-    while(i <= (this.length-1) && isDone == true){
-        isDone = this[i];
-        i++;
-    }
-    return isDone;
-}
-
-readyList.count = function(){
-    var count = 0;
-    for(var i=0; i<= (this.length-1); i++){
-        if(this[i]){
-            count++;
-        }
-    }
-    return count;
-}
 
 /*----------------
 Methods
@@ -95,6 +65,18 @@ function init(){
     imageElement = $("#image");
 }
 
+function updateProgress(){
+    document.getElementById('loading').innerHTML =
+        '<p>Starting... ' + readyList.count() + ' / ' + readyList.length +'</p>';
+        
+    if(readyList.fails() >= 1){
+        document.getElementById('error-icon').style.display = 'inline-block';
+    }
+    else{
+        document.getElementById('error-icon').style.display = 'none';
+    }
+}
+
 /**
  * Contacts server and loads new images into the imageCache variable.
  */
@@ -102,55 +84,55 @@ function fetchImages(){
     readyList.clear();
     document.getElementById('loading-icon').style.display = 'inline-block'; //Display loading icon.
     for(var i = 0; i <= (views.length-1); i++){
-        console.log("Fetching Image "+ (i+1));
+        console.log("Fetching Feed for Image "+ (i+1));
         var view = views[i];
         var url = "./proxy.php?channel="+view.id;
-        parseImage(url, i);
+        parseFeed(url, i);
     }
 }
 
 /**
- * Gets the JSON data at the specified URL `url`.
- * When loading is complete sets element `index` of readyList to true.
+ * Gets the JSON data at the specified URL `url`. 
+ * The image url and meta data (date and time) are extracted from the feed.
+ * When loading is complete the element `index` of the readyList array is set to true.
  */
-function parseImage(url, index){
+function parseFeed(url, index){
     $.getJSON(url, function(data) {
         try{
-            console.log("Parsing Image " + (index+1));
+            console.log("Parsing Feed for Image " + (index+1));
 
             //The first element of the JSON feed contains latest image.
             var latest = data['channel']['item'];
 
-            // The JSON feeds offers images in 512px times 512px by default.
-            // Example filename in JSON feed: "20140416_072402_512_0094.jpg"
-            // To access the other resolutions we need to replace the "_512_" with the appropriate resolution.
-            // /_512_/ is interpreted as a regular expression.
-            var imageURL = latest.link.replace(/_512_/, "_"+IMAGE_RESOLUTION+"_");
+            // The JSON feeds offers images in size 4096x4096px (previously 512x512px) by default.
+            // Example filename in JSON feed: "20140416_072402_4096_0094.jpg"
+            // To access the other resolutions we need to replace the "_4096_" with the preferred resolution.
+            // /_4096_/ is interpreted as a regular expression.
+            var imageURL = latest.link.replace(/_4096_/, "_" + IMAGE_RESOLUTION + "_");
 
-            // Load Image: Browser will retrieve image from server. On the next reload it will use the cache instead of the web source.
-            var nextImage = new Image();
-            nextImage.onload = function(){ //Only mark as done when image is fully loaded!
-                console.log("Loaded!");
+            // Load Image: Browser will retrieve image from server. 
+            // On the next reload it will hit the cache instead of reloading the web source.
+            var latestImage = new Image();
+            latestImage.onload = function(){ //Only mark as done when image is fully loaded!
+                console.log("Image Loaded!");
                 //Mark as done and check if all images are loaded.
                 //Remove loading indicator if true.
                 readyList[index] = true;
 
-                document.getElementById('loading').innerHTML =
-                    '<p>Starting... ' + readyList.count() + ' / ' + readyList.length +'</p>';
+                updateProgress();
 
                 if(readyList.isDone()){
-                    console.log("Done Fetching and Parsing Images.")
                     document.getElementById('loading-icon').style.display = 'none';
-                    document.getElementById('loading').style.opacity = 0;
-                    initialLoadComplete = true;
+                }
 
-                    refreshImage();
+                if(carouselStarted == false && readyList.isDone()){
+                    startCarousel();
                 }
             };
-            nextImage.src = imageURL;
-            nextImage.id = "image";
+            latestImage.src = imageURL;
+            latestImage.id = "image";
 
-            // Update the displayed Timestamp.
+            // Get timestamp.
             // Previous:
             // The obs_date string doesn't have timezone information but is known to be in UTC.
             // For crossbrowser compatibility the date is converted to the following format: "YYYY-MM-DDTHH:MM:SSZ"
@@ -176,7 +158,7 @@ function parseImage(url, index){
                             + " Lokale Tijd";
 
             imageCache[index] = {
-                'image' : nextImage,
+                'image' : latestImage,
                 'utc' : utc,
                 'lokaal' : local
             }
@@ -189,43 +171,46 @@ function parseImage(url, index){
     }
     ).fail(function() {
         console.log("Unable to retrieve JSON file for image " + index);
+        readyList[index] = "fail";
     });
+}
+
+function startCarousel(){
+    console.log("Done Fetching and Parsing Images.");
+    document.getElementById('loading').style.opacity = 0;
+
+    // Set to -1 so that when incremented in refreshImage() the very first image is at index 0.
+    currentIndex = -1;
+    carouselStarted = true;
+    refreshImage();
 }
 
 /**
  * Move carousel to next image.
  *
- * If image is not yet loaded
- * Will try for `threshold` amount before giving up and moving to the next image.
+ * If this image is not yet loaded or failed to load it will try to move ahead to the following image.
  *
  */
 function refreshImage(){
-    console.log("Switching to image " + (currentIndex+1));
-    if(!initialLoadComplete || !readyList[currentIndex]){
-        currentIndex = (currentIndex + 1) % (views.length);
-        setTimeout(refreshImage, 1000);
+    currentIndex = (currentIndex + 1) % (views.length);
+    console.log("Switching to image " + currentIndex);
+    
+    if(readyList[currentIndex] == "fail"){
+        setTimeout(refreshImage, 0);
         return;
     }
 
     $("#metadata").fadeIn();
 
     var currentView = views[currentIndex];
+    var imageObject = imageCache[currentIndex];
 
-    document.getElementById("titel").innerHTML = currentView.title;
-    document.getElementById("UTC_tijd").textContent = imageCache[currentIndex].utc;
-    document.getElementById("Lokale_tijd").textContent = imageCache[currentIndex].lokaal;
-
-    var sensorFullName = sensors[currentView.sensor];
-    document.getElementById('sensor').textContent = currentView.sensor + " (" + sensorFullName +")";
-
-    //var imageElement = document.getElementById('image');
-    //imageElement.parentNode.replaceChild(imageCache[currentIndex].image, imageElement);
-    //imageElement.src=imageCache[currentIndex].image.src;
-
-    image_url = imageCache[currentIndex].image.src;
+    image_url = imageObject.image.src;
     imageElement.attr('src', image_url);
 
-    // Determine the duration this image will be displayed.
+    setMetaData(currentView, imageObject);
+    
+    // Determine the duration during which this image will be displayed.
     var interval = DEFAULT_INTERVAL;
     if(currentView.hasOwnProperty("duration")){
         interval = currentView.duration;
@@ -234,6 +219,17 @@ function refreshImage(){
     progressJs().set(100); //Reset the progressbar.
     progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 5% once every 1/20 * interval.
 
-    currentIndex = (currentIndex + 1) % (views.length);
     setTimeout(refreshImage, interval);
+}
+
+/**
+* Retrieve and set metadata for the given view/image.
+*/
+function setMetaData(view, imageObject){
+    document.getElementById("titel").innerHTML = view.title;
+    document.getElementById("UTC_tijd").textContent = imageObject.utc;
+    document.getElementById("Lokale_tijd").textContent = imageObject.lokaal;
+
+    var sensorFullName = sensors[view.sensor];
+    document.getElementById('sensor').textContent = view.sensor + " (" + sensorFullName +")";
 }

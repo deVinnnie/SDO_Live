@@ -108,6 +108,15 @@ aside{
     }
 }
 
+#error-icon::after{
+    display: inline-block;
+    font-size: 2vw;
+    color: #de9913;
+    vertical-align: super;
+    content: "\f071 ";
+    font-family: "FontAwesome";
+}
+
 #loading{
 	position: fixed;
 	bottom: 150px;

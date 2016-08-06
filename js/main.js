@@ -217,7 +217,7 @@ function refreshImage(){
     }
 
     progressJs().set(100); //Reset the progressbar.
-    progressJs().autoIncrease(-5, interval/20); //Decrease the progressbar with 5% once every 1/20 * interval.
+    progressJs().autoIncrease(-20, interval/5.5); //Decrease the progressbar with 5% once every 1/20 * interval.
 
     setTimeout(refreshImage, interval);
 }

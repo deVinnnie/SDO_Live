@@ -5,17 +5,24 @@ module.exports = function(grunt) {
             libsjs : {
                 src:
                 [
-                    'bower_components/jquery/dist/jquery.min.js',
+                    'node_modules/jquery/dist/jquery.min.js',
                     'bower_components/progress.js/minified/progress.min.js'
                 ],
                 dest: 'lib/libs.js'
-            },
-            libscss : {
-                    src: 'bower_components/progress.js/minified/progressjs.min.css',
-                    dest: 'lib/css/progressjs.min.css'
-                }
+            }
+            // libscss : {
+            //         src: 'bower_components/progress.js/minified/progressjs.min.css',
+            //         dest: 'lib/css/progressjs.min.css'
+            //     }
         },
         copy: {
+            vendor: {
+              files: [
+                  {src:'node_modules/font-awesome/fonts/FontAwesome.otf', dest:'static/vendor/fonts/FontAwesome.otf'},
+                  {src:'node_modules/jquery/dist/jquery.min.js', dest:'static/vendor/js/jquery.min.js'},
+                  {src:'node_modules/easy-pie-chart/dist/jquery.easypiechart.min.js', dest:'static/vendor/js/jquery.easy-pie-chart.js'},
+              ]
+            },
             dist: {
                 files: [
                     {expand: true, src: ['js/**'], dest: 'dist/'},
@@ -37,6 +44,6 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('dist', 'copy:dist');
-    grunt.registerTask('concat:libs', ['concat:libsjs', 'concat:libscss']);
+    grunt.registerTask('concat:libs', ['concat:libsjs']);
     grunt.registerTask('default', ['concat:libs','dist']);
 };

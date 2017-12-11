@@ -3,3 +3,6 @@ dist/**
 lib/**
 bower_components/**
 node_modules/**
+static/vendor/**
+static/feed/
+.idea

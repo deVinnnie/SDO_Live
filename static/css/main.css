@@ -1,8 +1,3 @@
-/**
- *  Main.css
- *
- *  @author Vincent Ceulemans
- */
 *{
     color: #FFF;
     font-family: "OpenSans", "Arial", sans-serif;
@@ -23,7 +18,7 @@ body{
 /*--------------
 IMAGEBOX
 ---------------*/
-#image{
+video, #image{
     float: left;
     width: 100vh; /* Make image fill as much space possible: set height to full height of viewscreen.*/
     height: 100vh;
@@ -45,6 +40,16 @@ aside{
     display: flex;
     flex-direction: column;
     min-height: 100vh;  /* Push #courtesy-message to bottom of page. */
+}
+
+
+#metadata{
+  opacity: 0;
+}
+
+#metadata ul{
+  list-style-type: none;
+  list-style: none;
 }
 
 #informatie{
@@ -86,6 +91,10 @@ aside{
     animation: spin 1s infinite steps(8);
 }
 
+#loading-icon{
+  /*display: none;*/
+}
+
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -108,6 +117,10 @@ aside{
     }
 }
 
+#error-icon{
+    display: none;
+}
+
 #error-icon::after{
     display: inline-block;
     font-size: 2vw;
@@ -117,25 +130,51 @@ aside{
     font-family: "FontAwesome";
 }
 
-#loading{
-	position: fixed;
-	bottom: 150px;
-	left: 50%;
-	width: 400px;
-	margin-left: -200px;
+.time-icon:after,
+.sensor-icon:before{
+  margin: 5px;
+  display: inline-block;
+  font-size: 2vw;
+  color: #de9913;
+  font-family: "FontAwesome";
+}
 
-	border: 1px solid #666;
-	background-color: #334;
-	padding: 15px 0;
+.time-icon:after{
+    content: "\f017";
+}
+
+.sensor-icon:before{
+    content: "\f030";
+}
+
+#time, 
+#sensor{
+  font-size: 2vw;
+}
+
+
+.chart{
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 	text-align: center;
-	font-size: 3vw;
-	opacity: .9;
+}
 
-	-webkit-transition: opacity 0.5s ease-out;  /* Saf3.2+, Chrome */
-	-moz-transition: opacity 0.5s ease-out;  /* FF4+ */
-	-ms-transition: opacity 0.5s ease-out;  /* IE10? */
-	-o-transition: opacity 0.5s ease-out;  /* Opera 10.5+ */
-	transition: opacity 0.5s ease-out;
+.chart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#viewIndicator{
+    width: 60px;
+    height: 60px;
+    font-size: 17px; 
+    line-height: 60px;
+    vertical-align: top;
 }
 
 
@@ -163,7 +202,7 @@ FONTS DEFINITION
 
 @font-face {
     font-family: "FontAwesome";
-    src: url('../lib/fonts/FontAwesome.otf');
+    src: url('../vendor/fonts/FontAwesome.otf');
     font-weight: normal;
     font-style: normal;
 }

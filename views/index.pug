@@ -1,0 +1,49 @@
+doctype html
+html(lang="nl")
+    head
+        title SDO Live
+        meta(charset="UTF-8")
+        meta(name="author",   content="Volkssterrenwacht MIRA")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        // Prevent this page from showing up in Google search results
+        meta(name="robots",    content="NONE")
+        meta(name="googlebot", content="nosnippet,nofollow,noindex")
+
+        script(type="text/javascript", src="vendor/js/jquery.min.js")
+        script(type="text/javascript", src="vendor/js/jquery.easy-pie-chart.js")
+        script(type="text/javascript", src="js/views.js")
+        script(type="text/javascript", src="js/main.js")
+      
+        link(rel="stylesheet", type="text/css", href="css/main.css")
+
+    body
+        img#image(src="images/black_square.png")
+
+        // Some additional information about the current image
+        aside
+            #informatie
+                h1 SDO Live Beeld
+                  span#loading-icon
+                  span#error-icon
+                  div.chart(data-percent="100")
+                    span#viewIndicator
+                      
+                h2#titel
+
+                #metadata
+                  ul
+                    li
+                      span.time-icon
+                      span#time
+                      
+                    li
+                      span.sensor-icon
+                      span#sensor
+
+                  .sensor(style="margin-top: 75px;")
+                      img(id="spacecraft", src="images/spacecraft/spacecraft-aia-overlay.png", width="250px", style="float:right;margin-left: 50px; margin-right: 30px; margin-bottom:30px;")
+
+            
+            // This stuff needs to be here according to http://sdo.gsfc.nasa.gov/data/rules.php
+            p(id="courtesy-message") Courtesy of NASA/SDO and the AIA, EVE, and HMI science teams.

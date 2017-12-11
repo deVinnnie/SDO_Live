@@ -1,34 +1,4 @@
 /**
- * views.js
- *
- * This file contains some adjustable settings for the main script.
- * Feel free to edit this file!
- *
- * @author Vincent Ceulemans
- *
- */
-
-/**
- * Refresh rate (in miliseconds).
- * Default amount time during which the image will be displayed.
- *
- */
-var DEFAULT_INTERVAL = 20*1000; //10s
-
-/*
-* Interval at which new images are downloaded.
-* SDO images are refreshed every 15 minutes.
-*/
-var FETCH_INTERVAL = 15*60*1000; //15 minutes
-
-/**
- *  Image resolution in pixels.
- *  Example: 512, 1024...
- *  Check http://sdo.gsfc.nasa.gov/data/ for available resolutions.
- */
-var IMAGE_RESOLUTION = 512;
-
-/**
  * The list of images to retrieve.
  *
  * Each entry contains the following values:
@@ -41,11 +11,10 @@ var IMAGE_RESOLUTION = 512;
  * You can comment out entries which should not be displayed.
  *
  */
-var views= [
+exports.channels = [
     {
         id: "aia_0193",
         title: "AIA 193",
-        duration: 20000, //20 seconds
         sensor: "AIA"
     },
     {
@@ -53,7 +22,7 @@ var views= [
         title: "AIA 304",
         sensor: "AIA"
     },
-    {
+    /*{
         id:"aia_0171",
         title: "AIA 171",
         sensor: "AIA"
@@ -117,15 +86,5 @@ var views= [
         id: "hmii",
         title: "HMI Intensitygram",
         sensor: "HMI"
-    }
+    }*/
 ];
-
-/**
- * The list of instruments/sensors aboard the SDO.
- * This is used to map the abbreviation of each instrument to its full name.
- */
-var sensors = {
-    "AIA" : "Atmospheric Imaging Assembly",
-    "HMI" : "Helioseismic and Magnetic Imager",
-    "EVE" : "Extreme Ultraviolet Variability Experiment"
-}; 

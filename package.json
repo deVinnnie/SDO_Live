@@ -17,5 +17,8 @@
     "grunt": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-copy": "*"
+  },
+  "scripts": {
+    "start": "node main.js",
   }
 }

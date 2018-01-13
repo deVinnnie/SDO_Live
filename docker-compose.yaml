@@ -1,0 +1,14 @@
+version: "2"
+services:
+  sdo:
+    image: sdo-live
+    build:
+      context: .
+    ports:
+      - "49494:3000"
+    networks:
+      - frontend
+  
+networks:
+  frontend:
+    driver: bridge

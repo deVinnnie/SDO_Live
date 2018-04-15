@@ -17,7 +17,7 @@
     "grunt": "*",
     "chai": "^4.1.2",
     "grunt-contrib-concat": "*",
-    "grunt-contrib-copy": "*"
+    "grunt-contrib-copy": "*",
     "load-grunt-tasks": "^3.5.2",
     "mocha": "^4.1.0"
   },

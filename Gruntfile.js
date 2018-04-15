@@ -1,5 +1,6 @@
-module.exports = function(grunt) {
-    // Project configuration.
+module.exports = grunt => {
+    require('load-grunt-tasks')(grunt);
+
     grunt.initConfig({
         concat: {
             libsjs : {
@@ -38,9 +39,6 @@ module.exports = function(grunt) {
             }
         }
     });
-
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Default task(s).
     grunt.registerTask('dist', 'copy:dist');

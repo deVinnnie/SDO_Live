@@ -131,6 +131,7 @@ aside{
 }
 
 .time-icon:after,
+.date-icon:after,
 .sensor-icon:before{
   margin: 5px;
   display: inline-block;
@@ -145,6 +146,10 @@ aside{
 
 .sensor-icon:before{
     content: "\f030";
+}
+
+.date-icon:after{
+    content: "\f073";
 }
 
 #time, 

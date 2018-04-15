@@ -108,13 +108,15 @@ function setMetaData(view){
     
     var time = new Date(view.latest.date);
     
+    var date = ('0' + time.getDate()).slice(-2) 
+                + " " 
+                + months[time.getMonth()];
+    
     var local = 
-          ('0' + time.getDate()).slice(-2) + " " + 
-          months[time.getMonth()] + " " +  
           ('0' + time.getHours()).slice(-2) + "h" + 
           ('0' + time.getMinutes()).slice(-2) + "m"
-                      
     
+    document.getElementById("date").textContent = date;
     document.getElementById("time").textContent = local;
 
     var sensorFullName = sensors[view.sensor];

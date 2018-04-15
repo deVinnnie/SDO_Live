@@ -14,10 +14,13 @@
   },
   "devDependencies": {
     "grunt": "*",
+    "chai": "^4.1.2",
     "grunt-contrib-concat": "*",
     "grunt-contrib-copy": "*"
+    "mocha": "^4.1.0"
   },
   "scripts": {
-    "start": "node main.js",
+    "start": "node app/main.js",
+    "test": "mocha test/**.spec.js"
   }
 }

@@ -190,24 +190,24 @@ aside{
 
 /*--------------
 FONTS DEFINITION
+--------------*/
 @font-face {
----------------*/
     font-family: "OpenSans";
     font-style: italic;
-    src: url("../fonts/OpenSans/OpenSans-Italic.ttf");
+    src: url("../vendor/fonts/OpenSans-Italic.ttf");
 }
 
 @font-face {
     font-family: "OpenSans";
     font-weight: bold;
-    src: url('../fonts/OpenSans/OpenSans-Bold.ttf');
+    src: url('../vendor/fonts/OpenSans-Bold.ttf');
 }
 
 @font-face {
     font-family: "OpenSans";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/OpenSans/OpenSans-Regular.ttf");
+    src: url("../vendor/fonts/OpenSans-Regular.ttf");
 }
 
 @font-face {

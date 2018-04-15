@@ -20,6 +20,9 @@ module.exports = grunt => {
             vendor: {
               files: [
                   {src:'node_modules/font-awesome/fonts/FontAwesome.otf', dest:'static/vendor/fonts/FontAwesome.otf'},
+                  {src:'node_modules/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf', dest:'static/vendor/fonts/OpenSans-Regular.ttf'},
+                  {src:'node_modules/npm-font-open-sans/fonts/Bold/OpenSans-Bold.ttf', dest:'static/vendor/fonts/OpenSans-Bold.ttf'},
+                  {src:'node_modules/npm-font-open-sans/fonts/Italic/OpenSans-Italic.ttf', dest:'static/vendor/fonts/OpenSans-Italic.ttf'},
                   {src:'node_modules/jquery/dist/jquery.min.js', dest:'static/vendor/js/jquery.min.js'},
                   {src:'node_modules/raphael/raphael.js',dest:'static/vendor/js/raphael.js'},
               ]

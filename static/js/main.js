@@ -23,15 +23,6 @@ function init(){
     //full-screen-api.allow-trusted-requests-only = false
     //See: http://stackoverflow.com/questions/9454125/javascript-request-fullscreen-is-unreliable
 
-    $('.chart').easyPieChart({
-      //animate: 500,
-      animate: false,
-      barColor: "#de9913",
-      trackColor: "#000",
-      scaleColor: false,
-      size: 60
-    });
-
     fetchImages(
       () => {
         document.getElementById('loading-icon').style.display = 'none';
@@ -100,25 +91,8 @@ function refreshImage(){
 
     setMetaData(currentView);
     
-    // Determine the duration during which this image will be displayed. 
-    countDown = 100;
-    $('.chart').data('easyPieChart').update(countDown);
-    setTimeout(removeTick, DEFAULT_INTERVAL/steps);
-
+    spinner.reset();
     setTimeout(refreshImage, DEFAULT_INTERVAL);
-}
-
-var steps = 20;
-var countDown;
-
-function removeTick(){
-    $('.chart').data('easyPieChart').update(countDown);
-    
-    countDown-= (100/steps);
-    
-    if(countDown > 0){
-        setTimeout(removeTick, DEFAULT_INTERVAL/steps);
-    }
 }
 
 /**
@@ -126,7 +100,11 @@ function removeTick(){
 */
 function setMetaData(view){
     document.getElementById("titel").innerHTML = view.title;
-    document.getElementById("viewIndicator").innerHTML = "<sup>" + (currentIndex+1) +  "</sup>"+ "/" + "<sub>"+views.length + "</sub>";
+    
+    text.attr('text',
+      "" + (currentIndex+1) +  "/"
+       + views.length
+    );
     
     var time = new Date(view.latest.date);
     

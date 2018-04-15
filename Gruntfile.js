@@ -20,7 +20,7 @@ module.exports = function(grunt) {
               files: [
                   {src:'node_modules/font-awesome/fonts/FontAwesome.otf', dest:'static/vendor/fonts/FontAwesome.otf'},
                   {src:'node_modules/jquery/dist/jquery.min.js', dest:'static/vendor/js/jquery.min.js'},
-                  {src:'node_modules/easy-pie-chart/dist/jquery.easypiechart.min.js', dest:'static/vendor/js/jquery.easy-pie-chart.js'},
+                  {src:'node_modules/raphael/raphael.js',dest:'static/vendor/js/raphael.js'},
               ]
             },
             dist: {

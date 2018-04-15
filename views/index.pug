@@ -12,10 +12,13 @@ html(lang="nl")
 
         script(type="text/javascript", src="vendor/js/jquery.min.js")
         script(type="text/javascript", src="vendor/js/jquery.easy-pie-chart.js")
+        script(type="text/javascript", src="vendor/js/raphael.js")
         script(type="text/javascript", src="js/views.js")
+        script(type="text/javascript", src="js/spinner.js")
         script(type="text/javascript", src="js/main.js")
       
         link(rel="stylesheet", type="text/css", href="css/main.css")
+
 
     body
         img#image(src="images/black_square.png")
@@ -23,11 +26,11 @@ html(lang="nl")
         // Some additional information about the current image
         aside
             #informatie
+                div#holder
                 h1 SDO Live Beeld
                   span#loading-icon
                   span#error-icon
-                  div.chart(data-percent="100")
-                    span#viewIndicator
+                  
                       
                 h2#titel
 

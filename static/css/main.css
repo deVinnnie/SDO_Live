@@ -170,18 +170,23 @@ aside{
 }
 
 #viewIndicator{
-    width: 60px;
+    /* width: 60px;
     height: 60px;
     font-size: 17px; 
     line-height: 60px;
-    vertical-align: top;
+    vertical-align: top; */
+}
+
+#holder{
+  float: right;
+  margin: 5px;
 }
 
 
 /*--------------
 FONTS DEFINITION
----------------*/
 @font-face {
+---------------*/
     font-family: "OpenSans";
     font-style: italic;
     src: url("../fonts/OpenSans/OpenSans-Italic.ttf");

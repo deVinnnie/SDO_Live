@@ -8,7 +8,6 @@
     "image-downloader": "*",
     "jquery": "1.12.0",
     "moment": "^2.21.0",
-    "npm-font-open-sans": "^1.1.0",
     "pug": "^2.0.1",
     "raphael": "*",
     "xml2js": "^0.4.19"

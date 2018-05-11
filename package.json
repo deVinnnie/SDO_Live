@@ -2,7 +2,6 @@
   "name": "SDO_Live",
   "version": "0.4.0",
   "dependencies": {
-    "easy-pie-chart": "*",
     "express": "^4.16.2",
     "font-awesome": "*",
     "image-downloader": "*",

@@ -5,6 +5,7 @@
     "express": "^4.16.2",
     "font-awesome": "*",
     "image-downloader": "*",
+    "request": "2.85.0",
     "jquery": "3.3.1",
     "moment": "^2.21.4",
     "pug": "^2.0.1",

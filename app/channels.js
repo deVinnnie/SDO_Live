@@ -59,12 +59,12 @@ channels = [
     },
     {
         id: "hmib",
-        title: "HMI Magnetogram <small>[Zwart-Wit]</small>",
+        title: "HMI Magnetogram [Zwart-Wit]",
         sensor: "HMI"
     },
     {
         id: "hmibc",
-        title: "HMI Magnetogram <small>[Kleur]</small>",
+        title: "HMI Magnetogram [Kleur]",
         sensor: "HMI"
     },
     {

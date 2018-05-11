@@ -37,6 +37,7 @@ app.get('/actions/clear', (req, res) => {
 })
 
 app.use(express.static('static'))
+app.use(express.static('dist'))
 app.set('view engine', 'pug')
 
 app.listen(3000, () => {

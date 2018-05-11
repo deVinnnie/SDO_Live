@@ -42,11 +42,6 @@ aside{
     min-height: 100vh;  /* Push #courtesy-message to bottom of page. */
 }
 
-
-#metadata{
-  opacity: 0;
-}
-
 #metadata ul{
   list-style-type: none;
   list-style: none;
@@ -117,10 +112,6 @@ aside{
     }
 }
 
-#error-icon{
-    display: none;
-}
-
 #error-icon::after{
     display: inline-block;
     font-size: 2vw;
@@ -152,8 +143,7 @@ aside{
     content: "\f073";
 }
 
-#time, 
-#sensor{
+#metadata{
   font-size: 2vw;
 }
 
@@ -182,14 +172,6 @@ aside{
   position: absolute;
   top: 0;
   left: 0;
-}
-
-#viewIndicator{
-    /* width: 60px;
-    height: 60px;
-    font-size: 17px; 
-    line-height: 60px;
-    vertical-align: top; */
 }
 
 #holder{

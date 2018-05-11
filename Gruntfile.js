@@ -1,21 +1,9 @@
+const webpackConfig = require('./webpack.config.js');
+
 module.exports = grunt => {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
-        concat: {
-            libsjs : {
-                src:
-                [
-                    'node_modules/jquery/dist/jquery.min.js',
-                    'bower_components/progress.js/minified/progress.min.js'
-                ],
-                dest: 'lib/libs.js'
-            }
-            // libscss : {
-            //         src: 'bower_components/progress.js/minified/progressjs.min.css',
-            //         dest: 'lib/css/progressjs.min.css'
-            //     }
-        },
         copy: {
             vendor: {
               files: [
@@ -40,11 +28,28 @@ module.exports = grunt => {
                     {src:'LICENSE', dest:'dist/LICENSE'}
                 ]
             }
+        },
+        babel: {
+          options: {
+            sourceMap: true
+          },
+          files: {
+            expand: true,
+            src: "static/js/*.js",
+            //ext: "-compiled.js",
+            dest: "dist/"
+          }
+        },
+        webpack: {
+          options: {
+            stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+          },
+          build: Object.assign({ watch: false }, webpackConfig)
         }
     });
 
     // Default task(s).
     grunt.registerTask('dist', 'copy:dist');
     grunt.registerTask('concat:libs', ['concat:libsjs']);
-    grunt.registerTask('default', ['concat:libs','dist']);
-};
+    grunt.registerTask('default', ['babel', 'webpack:build']);//, 'concat:libs']); /*,'dist']);*/
+}

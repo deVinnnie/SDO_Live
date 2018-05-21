@@ -4,11 +4,8 @@
  * Each entry contains the following values:
  * id: Used for feed retrieval. Do not change this value.
  * title: Text displayed after "SDO Live -" in H1 of page.
- * duration: Amount of time to wait before showing the next image.
- *          (Expressed in milliseconds: 1 seconds = 1000)
- *          If no duration is specified the default value in DEFAULT_INTERVAL is used.
  *
- * You can comment out entries which should not be displayed.
+ * You can comment out or remove entries which should not be displayed.
  *
  */
 channels = [

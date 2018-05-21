@@ -7,7 +7,7 @@ Kiosk application which periodically retrieves images taken by the SDO (Solar
 Dynamics Observatory) spacecraft. The images are displayed in a carousel,
 accompanied by the timestamp and sensor name.
 
-Settings can be changed by editing [js/views.js](static/js/views.js).
+Settings can be changed by editing [app/channels.js](app/channels.js) and [static/js/views.js](static/js/views.js).
 
 Starting full screen
 --------------------

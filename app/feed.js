@@ -28,7 +28,7 @@ exports.get = function(channel){
  *  Example: 512, 1024...
  *  Check http://sdo.gsfc.nasa.gov/data/ for available resolutions.
  */
-var IMAGE_RESOLUTION = "512";
+var IMAGE_RESOLUTION = "1024";
 
 
 exports.parseXml = function(xml){  

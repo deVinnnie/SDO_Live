@@ -41,7 +41,7 @@ app.use(express.static('dist'))
 app.set('view engine', 'pug')
 
 app.listen(3000, () => {
-  console.log('Example app listening on port 3000!')
+  console.log('SDO Live listening on port 3000!')
 })
 
 function cleanup(){

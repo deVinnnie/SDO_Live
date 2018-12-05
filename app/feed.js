@@ -62,7 +62,7 @@ exports.imageDownloadDir = './static/feed'
 function getImage(imgUrl){
   let options = {
     url: imgUrl,
-    dest: './static/feed'                  // Save to /path/to/dest/image.jpg
+    dest: './static/feed'
   }
   
   console.log(options)

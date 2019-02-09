@@ -24,8 +24,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      "React": "react",
-      $: "jquery",
+      "React": "react"
     })
     //new webpack.HotModuleReplacementPlugin()
   ],

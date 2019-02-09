@@ -6,7 +6,6 @@
     "font-awesome": "*",
     "image-downloader": "*",
     "request": "2.88.0",
-    "jquery": "3.3.1",
     "moment": "^2.22.2",
     "pug": "^2.0.3",
     "npm-font-open-sans": "^1.1.0",

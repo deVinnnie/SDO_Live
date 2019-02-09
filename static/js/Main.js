@@ -81,24 +81,27 @@ export class Main extends React.Component {
     fetchImages(callback){
         console.log("Sending update command");
         this.setLoading(true);
+      
+        fetch("/actions/update")
+          .then(() => {
+            fetch("/channels")
+              .then(response => response.json())
+              .then(
+                (data) => {
+                  console.log("Reading Channels");
+                  this.channels = data;
+                  console.log(data);
 
-        $.get("/actions/update",
-          () => {
-            $.getJSON("/channels",
-              (data) => {
-                console.log("Reading Channels");
-                this.channels = data;
+                  this.setLoading(false);
 
-                this.setLoading(false);
-
-                if(callback){
-                  callback();
+                  if(callback){
+                    callback();
+                  }
                 }
-              }
-            );
+              )
           }
         )
-        .fail(function() {
+        .catch(error => {
             setError(true);
             console.log("Unable to do update command");
         });

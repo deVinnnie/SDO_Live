@@ -33,6 +33,7 @@
     "react-hot-loader": "^4.3.12"
   },
   "scripts": {
+    "build" : "grunt",
     "start": "node app/main.js",
     "test": "mocha test/**.spec.js"
   }

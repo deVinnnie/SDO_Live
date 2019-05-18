@@ -2,11 +2,12 @@ FROM node:carbon-alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN npm install
-
 COPY . .
-RUN mkdir ./static/feed/
+
+RUN npm install -g grunt-cli
+RUN npm install && npm run build
+
+RUN mkdir -p ./static/feed/
 
 EXPOSE 3000
 

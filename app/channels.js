@@ -101,6 +101,15 @@ function update(){
     )
     .then(
       (feedResponse) => {
+        console.log(feedResponse.image_src)
+        feed.getImage(
+          feedResponse.image_src
+        );
+        return feedResponse;
+      }
+    )
+    .then(
+      (feedResponse) => {
         this.latest = feedResponse
       }
     )

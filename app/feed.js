@@ -41,12 +41,9 @@ exports.parseXml = function(xml){
       
       imgUrl = imgUrl.replace(/_4096_/, "_" + IMAGE_RESOLUTION + "_")
       
-      getImage(
-        imgUrl
-      );
-      
       let feedResponse = {
         "date"   : pubDate,
+        "image_src" : imgUrl,
         "image" : "/feed/"+imgUrl.split("/").pop()
       }
       resolve(feedResponse)
@@ -59,7 +56,7 @@ const download = require('image-downloader')
 // Download to a directory and save with the original filename
 exports.imageDownloadDir = './static/feed'
 
-function getImage(imgUrl){
+exports.getImage = function(imgUrl){
   let options = {
     url: imgUrl,
     dest: './static/feed'

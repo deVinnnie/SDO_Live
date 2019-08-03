@@ -1,6 +1,6 @@
 'use strict'
 
-const expect = require('chai').expect
+const assert = require('chai').assert
 const parseXml = require('../app/feed').parseXml
 const fs = require('fs')
 
@@ -12,15 +12,16 @@ describe('parseXml', () => {
     return Promise.resolve(promise)
       .then(
         (feedResponse) => {
-          /*expect(feedResponse.date).to.equal(
-            "2017-01-30 17:14:36.000Z"
-          )*/
-          expect(feedResponse.image).to.equal(
-            "/feed/20170130_171436_512_0094.jpg"
+          assert.equal(
+            feedResponse.date.getTime(),
+            (new Date("Mon, 30 Jan 2017 17:14:36 GMT")).getTime()
+          )
+          
+          assert.equal(
+            feedResponse.image,
+            "/feed/20170130_171436_1024_0094.jpg"
           )
         }
-      ).catch((err) => {
-        throw new Error('was not supposed to fail'); 
-      })
+      )
   })
 })

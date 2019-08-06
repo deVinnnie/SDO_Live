@@ -177,25 +177,25 @@ FONTS DEFINITION
 @font-face {
     font-family: "OpenSans";
     font-style: italic;
-    src: url("../vendor/fonts/OpenSans-Italic.ttf");
+    src: url("/fonts/OpenSans-Italic.ttf");
 }
 
 @font-face {
     font-family: "OpenSans";
     font-weight: bold;
-    src: url('../vendor/fonts/OpenSans-Bold.ttf');
+    src: url('/fonts/OpenSans-Bold.ttf');
 }
 
 @font-face {
     font-family: "OpenSans";
     font-style: normal;
     font-weight: normal;
-    src: url("../vendor/fonts/OpenSans-Regular.ttf");
+    src: url("/fonts/OpenSans-Regular.ttf");
 }
 
 @font-face {
     font-family: "FontAwesome";
-    src: url('../vendor/fonts/FontAwesome.otf');
+    src: url('/fonts/FontAwesome.otf');
     font-weight: normal;
     font-style: normal;
 }

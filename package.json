@@ -15,26 +15,27 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.2",
     "@babel/core": "7.2.2",
     "@babel/preset-env": "7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
-    "chai": "^4.2.0",
-    "grunt": "^1.0.3",
-    "grunt-babel": "^8.0.0",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-copy": "*",
-    "grunt-webpack": "^3.1.1",
-    "load-grunt-tasks": "^3.5.2",
+    "file-loader": "^4.1.0",
     "mocha": "^5.2.0",
+    "chai": "^4.2.0",
     "webpack": "^4.29.3",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14",
-    "react-hot-loader": "^4.3.12"
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "build" : "grunt",
+    "build": "npm run babel && npm run webpack && rm -rf dist/static/ && npm run bundle-fonts",
     "start": "node app/main.js",
+    "babel": "babel static/js/ -d dist/static/js",
+    "webpack": "webpack",
+    "bundle-fonts": "mkdir -p ./dist/fonts/ && npm run bundle:font-awesome && npm run bundle:open-sans:italic && npm run bundle:open-sans:bold && npm run bundle:open-sans:regular",
+    "bundle:font-awesome": "cp node_modules/font-awesome/fonts/FontAwesome.otf ./dist/fonts/FontAwesome.otf",
+    "bundle:open-sans:italic": "cp node_modules/npm-font-open-sans/fonts/Italic/OpenSans-Italic.ttf ./dist/fonts/OpenSans-Italic.ttf",
+    "bundle:open-sans:bold": "cp node_modules/npm-font-open-sans/fonts/Bold/OpenSans-Bold.ttf ./dist/fonts/OpenSans-Bold.ttf",
+    "bundle:open-sans:regular": "cp node_modules/npm-font-open-sans/fonts/Regular/OpenSans-Regular.ttf ./dist/fonts/OpenSans-Regular.ttf",
     "test": "mocha test/**.spec.js"
   }
 }

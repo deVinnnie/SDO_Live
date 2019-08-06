@@ -11,6 +11,18 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.(woff(2)?|ttf|otf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
       }
     ]
   },
@@ -24,7 +36,8 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      "React": "react"
+      "React": "react",
+      "Raphael" : "raphael"
     })
     //new webpack.HotModuleReplacementPlugin()
   ],

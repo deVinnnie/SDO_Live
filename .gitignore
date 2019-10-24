@@ -6,3 +6,4 @@ node_modules/**
 static/vendor/**
 static/feed/
 .idea
+listing.txt

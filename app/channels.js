@@ -8,118 +8,80 @@
  * You can comment out or remove entries which should not be displayed.
  *
  */
-channels = [
+exports.channels = [
     {
-        id: "aia_0193",
+        id: "0193",
         title: "AIA 193",
         sensor: "AIA"
     },
     {
-        id:"aia_0304",
+        id:"0304",
         title: "AIA 304",
         sensor: "AIA"
     },
     {
-        id:"aia_0171",
+        id:"0171",
         title: "AIA 171",
         sensor: "AIA"
     },
     {
-        id:"aia_0211",
+        id:"0211",
         title: "AIA 211",
         sensor: "AIA"
     },
     {
-        id:"aia_0131",
+        id:"0131",
         title: "AIA 131",
         sensor: "AIA"
     },
     {
-        id:"aia_0335",
+        id:"0335",
         title: "AIA 335",
         sensor: "AIA"
     },
     {
-        id:"aia_0094",
+        id:"0094",
         title: "AIA 94",
         sensor: "AIA"
     },
     {
-        id:"aia_1600",
+        id:"1600",
         title: "AIA 1600",
         sensor: "AIA"
     },
     {
-        id:"aia_1700",
+        id:"1700",
         title: "AIA 1700",
         sensor: "AIA"
     },
     {
-        id: "hmib",
+        id: "HMIB",
         title: "HMI Magnetogram [Zwart-Wit]",
         sensor: "HMI"
     },
     {
-        id: "hmibc",
+        id: "HMIBC",
         title: "HMI Magnetogram [Kleur]",
         sensor: "HMI"
     },
     {
-        id: "COMP094335193",
+        id: "094335193",
         title: "Composite 094, 335, 193",
         sensor: "AIA"
     },
     {
-        id:"COMP211193171",
+        id:"211193171",
         title: "Composite 211, 193, 171",
         sensor: "AIA"
     },
     {
-        id:"COMP304211171",
+        id:"304211171",
         title: "Composite 304, 211, 171",
         sensor: "AIA"
     },
     {
-        id: "hmii",
+        id: "HMII",
         title: "HMI Intensitygram",
         sensor: "HMI"
     }
 ];
-
-const feedBaseUrl = "https://sdo.gsfc.nasa.gov/"
-function feedUrl(channel){
-  return feedBaseUrl+"feeds/"+channel.id+".rss"
-}
-
-const feed = require('./feed')
-
-
-function update(){
-  feed.get(this)
-    .then(
-      (body) => feed.parseXml(body)
-    )
-    .then(
-      (feedResponse) => {
-        console.log(feedResponse.image_src)
-        feed.getImage(
-          feedResponse.image_src
-        );
-        return feedResponse;
-      }
-    )
-    .then(
-      (feedResponse) => {
-        this.latest = feedResponse
-      }
-    )
-}
-
-channels.forEach(
-  c => {
-    c.feed = feedUrl(c)
-    c.update = update;
-  }
-)
-
-exports.channels = channels

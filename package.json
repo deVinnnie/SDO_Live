@@ -5,14 +5,13 @@
     "express": "^4.17.1",
     "font-awesome": "*",
     "image-downloader": "*",
-    "request": "2.88.0",
     "moment": "^2.24.0",
     "pug": "^2.0.4",
     "npm-font-open-sans": "^1.1.0",
     "raphael": "*",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "xml2js": "^0.4.19"
+    "shelljs": "0.8.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

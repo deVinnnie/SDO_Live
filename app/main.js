@@ -86,11 +86,17 @@ function updateAllChannels(){
   }
   lastUpdate = now;
   
+  feed.refresh();
+  listing = feed.getListing();
+  
   channels.forEach(
-    c => {
-      c.update()
+    channel => {
+      channel.latest = listing.filter(entry => entry.channel == channel.id)[0];
+      if(channel.latest){
+        feed.getImage(channel.latest.image_src);
+      }
     }
-  )
+  );
 }
 
 // -------------------------------------------------------------------

@@ -6,8 +6,7 @@ RUN apk --no-cache add curl
 
 COPY . .
 
-RUN npm install -g grunt-cli
-RUN npm install && npm run build
+RUN npm install && npm run build && npm prune --production
 
 RUN mkdir -p ./static/feed/
 

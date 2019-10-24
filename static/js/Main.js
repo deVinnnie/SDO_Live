@@ -89,7 +89,11 @@ export class Main extends React.Component {
               .then(
                 (data) => {
                   console.log("Reading Channels");
-                  this.channels = data;
+                  
+                  this.channels = data.filter(
+                    // Skip channels that don't have images.
+                    channel => channel.latest
+                  );
                   console.log(data);
 
                   this.setLoading(false);

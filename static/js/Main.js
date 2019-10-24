@@ -97,6 +97,7 @@ export class Main extends React.Component {
                   console.log(data);
 
                   this.setLoading(false);
+                  this.setError(false);
 
                   if(callback){
                     callback();
@@ -106,7 +107,7 @@ export class Main extends React.Component {
           }
         )
         .catch(error => {
-            setError(true);
+            this.setError(true);
             console.log("Unable to do update command");
         });
     }

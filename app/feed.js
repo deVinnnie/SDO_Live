@@ -16,13 +16,10 @@ exports.getImage = function(imgUrl){
     dest: './static/feed'
   }
   
-  download.image(options)
+  return download.image(options)
     .then(({ filename, image }) => {
-      console.log('File saved to', filename)
-    }).catch((err) => {
-      console.log(err)
-      throw err
-    })
+      console.log('File saved to', filename);
+    });
 }
 
 const shell = require('shelljs');

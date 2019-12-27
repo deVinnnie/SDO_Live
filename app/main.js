@@ -89,12 +89,21 @@ function updateAllChannels(){
   feed.refresh();
   listing = feed.getListing();
   
-  channels.forEach(
-    channel => {
-      channel.latest = listing.filter(entry => entry.channel == channel.id)[0];
-      if(channel.latest){
-        feed.getImage(channel.latest.image_src);
+  channels
+    .map(channel => {
+      return {
+        "latest" : listing.filter(entry => entry.channel == channel.id)[0],
+        "channel": channel
       }
+    })
+    .filter(pair => pair.latest)
+    .forEach(pair => {
+      feed.getImage(pair.latest.image_src).then(
+        () => pair.channel.latest = pair.latest
+      ).catch((error) => {
+        console.log(error);
+        console.log("Skipping " + pair.channel.id);
+      });
     }
   );
 }

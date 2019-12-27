@@ -95,8 +95,10 @@ export class Main extends React.Component {
                   );
                   console.log(data);
 
-                  this.setLoading(false);
-                  this.setError(false);
+                  if(this.channels.length > 0){
+                    this.setLoading(false);
+                    this.setError(false);
+                  }
 
                   if(callback){
                     callback();

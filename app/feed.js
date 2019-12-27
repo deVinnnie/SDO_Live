@@ -16,9 +16,6 @@ exports.getImage = function(imgUrl){
     dest: './static/feed'
   }
   
-  console.log(options)
-  
-  
   download.image(options)
     .then(({ filename, image }) => {
       console.log('File saved to', filename)

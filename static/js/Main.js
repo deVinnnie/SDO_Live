@@ -9,9 +9,8 @@ export class Main extends React.Component {
         this.state = {
           "current" :  {
               "id": "aia_0193",
-              "title": "AIA 193",
-              "sensor": "AIA",
-              "feed": "https://sdo.gsfc.nasa.gov/feeds/aia_0193.rss",
+              "title": "",
+              "sensor": "",
               "latest": {
                 "image" : "images/black_square.png",
                 "date" : new Date()

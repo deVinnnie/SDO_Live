@@ -8,8 +8,7 @@ import {months,sensors} from './views';
 */
 export function Aside(props){
     let title = props.current.title;
-    let sensor = props.current.sensor;
-    let sensorFullName = sensors[sensor];
+    let sensor = props.current.sensor ? props.current.sensor + "(" + sensors[props.current.sensor] + ")" : "";
     let time = new Date(props.current.latest.date);
 
     let date = ('0' + time.getDate()).slice(-2)
@@ -46,9 +45,7 @@ export function Aside(props){
 
                           <li>
                             <span className="sensor-icon"/>
-                            <span id="sensor">
-                                {sensor} ({sensorFullName})
-                            </span>
+                            <span id="sensor">{sensor}</span>
                           </li>
                           </ul>
                     </div>

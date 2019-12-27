@@ -28,11 +28,7 @@ exports.getImage = function(imgUrl){
 const shell = require('shelljs');
 
 exports.refresh = function getViaSh(){
-  returnCode = shell.exec('./script.sh').code;
-  
-  if (returnCode !== 0) {
-    shell.exit(1);
-  }
+  shell.exec('./script.sh');
 }
 
 const fs = require('fs');

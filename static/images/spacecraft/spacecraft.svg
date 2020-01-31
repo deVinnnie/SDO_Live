@@ -16,10 +16,10 @@
    height="641"
    viewBox="0 0 600 641"
    sodipodi:docname="spacecraft.svg"
-   inkscape:version="0.92.1 r"
-   inkscape:export-filename="/home/vincent/MIRA/Software_Projecten/SDO_Live/SDO_Live/images/spacecraft/spacecraft-hmi-overlay.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96">
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"
+   inkscape:export-filename="/home/vincent/Development/Repos/SDO_Live/static/images/spacecraft/spacecraft-aia-overlay.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -28,13 +28,14 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs6" />
   <sodipodi:namedview
-     pagecolor="#ffffff"
+     pagecolor="#000000"
      bordercolor="#666666"
      borderopacity="1"
      objecttolerance="10"
@@ -42,34 +43,34 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1280"
-     inkscape:window-height="988"
+     inkscape:window-width="1366"
+     inkscape:window-height="704"
      id="namedview4"
      showgrid="false"
      inkscape:zoom="0.73634945"
-     inkscape:cx="325.61845"
-     inkscape:cy="276.47841"
-     inkscape:window-x="1366"
-     inkscape:window-y="0"
+     inkscape:cx="34.316542"
+     inkscape:cy="385.12248"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2" />
+     inkscape:current-layer="layer1" />
   <image
-     sodipodi:absref="/home/vincent/MIRA/Software_Projecten/SDO_Live/SDO_Live/images/spacecraft/spacecraft.png"
+     sodipodi:absref="/home/vincent/Development/Repos/SDO_Live/static/images/spacecraft/spacecraft.png"
      xlink:href="spacecraft.png"
-     width="600"
-     height="641"
-     preserveAspectRatio="none"
-     style="image-rendering:optimizeQuality"
-     id="image10"
+     y="0"
      x="0"
-     y="0" />
+     id="image10"
+     style="image-rendering:optimizeQuality"
+     preserveAspectRatio="none"
+     height="641"
+     width="600" />
   <g
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Overlay-AIA"
      style="display:inline">
     <rect
-       style="opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#66ab00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#de9913;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4485"
        width="307.6214"
        height="156.17877"
@@ -80,9 +81,9 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Overlay-HMI"
-     style="display:inline">
+     style="display:none">
     <rect
-       style="display:inline;opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#66ab00;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="display:inline;opacity:1;fill:#000000;fill-opacity:0;fill-rule:nonzero;stroke:#de9913;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4485-3"
        width="142.87126"
        height="156.77078"

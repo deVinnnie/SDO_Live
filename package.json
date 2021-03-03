@@ -5,7 +5,7 @@
     "express": "^4.17.1",
     "image-downloader": "*",
     "moment": "^2.24.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "raphael": "*",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

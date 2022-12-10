@@ -2,7 +2,7 @@
   "name": "SDO_Live",
   "version": "0.5.0",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "image-downloader": "*",
     "moment": "^2.24.0",
     "pug": "^2.0.4",
